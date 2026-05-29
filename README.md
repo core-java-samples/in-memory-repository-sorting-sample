@@ -21,5 +21,5 @@ repository.findAll(null);                                      // no sorting
 ## Run
 
 ```bash
-javac Main.java && java Main
+./mvnw spring-boot:run
 ```
