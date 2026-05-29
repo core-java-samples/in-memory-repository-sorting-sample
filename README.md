@@ -1,6 +1,6 @@
 # sortable-fake-repository-sample
 
-Extends [fake-repository-sample](https://github.com/core-java-samples/fake-repository-sample) with managed sorting.
+Extends [in-memory-repository-sample](https://github.com/core-java-samples/fake-repository-sample) with managed sorting.
 
 ## Structure
 
