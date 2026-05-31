@@ -1,25 +1,49 @@
-# sortable-fake-repository-sample
+# in-memory-repository-sorting-sample
 
-Extends [in-memory-repository-sample](https://github.com/core-java-samples/fake-repository-sample) with managed sorting.
+Extends [in-memory-repository-sample](https://github.com/core-java-samples/in-memory-repository-sample) with sorting support.
+
+## What It Demonstrates
+
+Adds a `Comparator<Owner>` parameter to the repository interface. The caller controls the sort order — the repository applies it before returning results. Passing `null` skips sorting and returns records in insertion order.
 
 ## Structure
 
-All code is in a single file: `Main.java`
+All code is in a single file: `InMemoryRepositorySortingApp.java`
+InMemoryRepositorySortingApp.java
+│
+├── Owner                   # Entity — record with id and name
+├── OwnerRepository         # Repository interface with Comparator<Owner> parameter
+├── FakeOwnerRepository     # In-memory implementation using LinkedHashMap
+└── InMemoryRepositorySortingApp  # Entry point + demo()
 
-- `Owner` — entity
-- `OwnerRepository` — repository interface with `Comparator<Owner>` parameter
-- `FakeOwnerRepository` — in-memory implementation using `LinkedHashMap`
+## Key Points
 
-## Usage
+**Comparator as a parameter.** The repository interface accepts a `Comparator<Owner>` — the caller decides the order, the repository just applies it.
 
-```java
-repository.findAll(Comparator.comparing(Owner::id));           // by id asc
-repository.findAll(Comparator.comparingLong(Owner::id).reversed()); // by id desc
-repository.findAll(null);                                      // no sorting
-```
+**Null means no sorting.** Passing `null` returns records in their natural insertion order — no special case needed in the caller.
+
+**Original data is never mutated.** Sorting is applied on a stream — the underlying `LinkedHashMap` stays unchanged.
+
+## Console Output
+Owner[id=1, name=jack1]
+Owner[id=2, name=jack2]
+...
+Owner[id=5, name=jack5]
+Owner[id=4, name=jack4]
+...
+Owner[id=1, name=jack1]
+Owner[id=2, name=jack2]
+...
+
+First block — sorted by id ascending. Second — by id descending. Third — no sorting, insertion order.
 
 ## Run
 
 ```bash
 ./mvnw spring-boot:run
 ```
+
+## See also
+
+- Previous: [in-memory-repository-sample](https://github.com/core-java-samples/in-memory-repository-sample)
+- Next: [pagination-pageable-sample](https://github.com/core-java-samples/pagination-pageable-sample)
