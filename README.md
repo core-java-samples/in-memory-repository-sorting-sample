@@ -4,7 +4,11 @@ Extends [in-memory-repository-sample](https://github.com/core-java-samples/in-me
 
 ## What It Demonstrates
 
-Adds a `Comparator<Owner>` parameter to the repository interface.  The caller controls the sort order — the repository applies it before returning results.  Passing `null` skips sorting and returns records in insertion order.
+Adds a `Comparator<Owner>` parameter to the repository interface.  
+
+The caller controls the sort order — the repository applies it before returning results.  
+
+Passing `null` skips sorting and returns records in insertion order.
 
 ## Structure
 
